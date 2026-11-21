@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WHISK · Your kitchen. Your possibilities.</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥄</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#faf6ee;--card:#fff;--g:#1f4a36;--g2:#2d6a4f;--sage:#a9bfa5;--sage2:#e3ebdf;--or:#e8892b;--or2:#fbe9d3;--tx:#25302a;--mu:#6d7a71;--ln:#e8e2d4;--red:#b5422f}
+*{box-sizing:border-box;margin:0}body{font:15px/1.5 Inter,system-ui,sans-serif;background:var(--bg);color:var(--tx);padding-bottom:40px}
+h1,h2,h3,.logo{font-family:Fraunces,Georgia,serif;font-weight:700;color:var(--g);letter-spacing:-.01em}
+header{position:sticky;top:0;z-index:20;background:rgba(250,246,238,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--ln);display:flex;align-items:center;gap:24px;padding:12px 5vw}
+.logo{font-size:26px;text-decoration:none;display:flex;flex-direction:column;line-height:1}.logo small{font:500 10px Inter;color:var(--mu);letter-spacing:.04em;margin-top:3px}
+nav{display:flex;gap:4px;margin-left:auto}nav a{padding:8px 14px;border-radius:99px;color:var(--mu);text-decoration:none;font-weight:500;transition:.2s}nav a:hover{background:var(--sage2)}nav a.on{background:var(--g);color:#fff}
+main{max-width:1180px;margin:0 auto;padding:28px 5vw}
+.btn{background:var(--g);color:#fff;border:0;padding:11px 20px;border-radius:99px;font:600 14px Inter;cursor:pointer;transition:.2s}.btn:hover{background:var(--g2);transform:translateY(-1px)}.btn.or{background:var(--or)}.btn.ghost{background:transparent;color:var(--g);border:1.5px solid var(--sage)}.btn.ghost:hover{background:var(--sage2)}.btn:disabled{opacity:.4;pointer-events:none}
+.hero{background:var(--g);color:#fff;border-radius:24px;padding:36px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:28px;position:relative;overflow:hidden}
+.hero:after{content:"🥬🍅🧄";position:absolute;right:20px;top:-10px;font-size:90px;opacity:.12;letter-spacing:10px}
+.hero h1{color:#fff;font-size:clamp(28px,4vw,40px)}.hero p{color:#cfe0d3;margin-top:6px}
+.stats{display:flex;gap:12px;margin:0 0 28px;flex-wrap:wrap}.stat{background:var(--card);border:1px solid var(--ln);border-radius:16px;padding:16px 22px;flex:1;min-width:140px}.stat b{font:700 30px Fraunces,serif;color:var(--g);display:block}.stat span{color:var(--mu);font-size:13px}.stat.w b{color:var(--or)}
+h2{font-size:26px;margin:6px 0 14px;display:flex;justify-content:space-between;align-items:baseline}h2 a{font:500 14px Inter;color:var(--or);text-decoration:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px;margin-bottom:30px}
+.card{background:var(--card);border:1px solid var(--ln);border-radius:18px;overflow:hidden;position:relative;transition:.25s}.rc{cursor:pointer}.rc:hover{transform:translateY(-4px);box-shadow:0 14px 30px -14px rgba(31,74,54,.35)}
+.ph{height:150px;display:grid;place-items:center;font-size:68px;position:relative}.ph span{transition:.3s}.rc:hover .ph span{transform:scale(1.15) rotate(-5deg)}
+.pct{position:absolute;left:12px;bottom:10px;background:#fff;color:var(--g);font:700 13px Inter;padding:3px 10px;border-radius:99px}
+.b{padding:14px 16px 16px}.b h3{font-size:18px}.meta,.sm{color:var(--mu);font-size:13px}.bar{height:6px;background:var(--sage2);border-radius:9px;margin:10px 0 6px;overflow:hidden}.bar i{display:block;height:100%;background:var(--g2);border-radius:9px;transition:width .5s}
+.use{color:var(--or);font-style:normal;font-weight:600}
+.card .fv{position:absolute;right:10px;top:10px;width:34px;height:34px;border-radius:50%;border:0;background:#ffffffd9;color:#bbb;font-size:17px;cursor:pointer;transition:.2s}.fv.on{color:var(--red)}.card .fv:hover{transform:scale(1.15)}
+.panel{background:var(--card);border:1px solid var(--ln);border-radius:20px;padding:22px;margin-bottom:24px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.chip{padding:6px 13px;border-radius:99px;background:var(--sage2);color:var(--g);border:1px solid transparent;cursor:pointer;font:500 13px Inter;transition:.15s;text-transform:capitalize}.chip:hover,.chip.on{background:var(--g);color:#fff}.chip.o{background:var(--or2);color:#9a5410}
+input,select{font:14px Inter;padding:10px 13px;border:1.5px solid var(--ln);border-radius:12px;background:#fff;color:var(--tx);min-width:0}input:focus,select:focus{outline:2px solid var(--sage);border-color:var(--g2)}
+.frm,.fl{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.frm input[type=text]{flex:2;min-width:160px}
+.it{display:flex;align-items:center;gap:14px;padding:12px 16px;margin-bottom:10px;flex-wrap:wrap}.it.soon{border-color:var(--or);background:#fffaf3}.it.exp{border-color:var(--red);background:#fdf1ee}
+.it .e{font-size:28px}.it .n{flex:1;min-width:110px;text-transform:capitalize;font-weight:600}.n small{display:block;color:var(--mu);font-weight:400}
+.q{display:flex;align-items:center;gap:8px}.q button{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--sage);background:#fff;cursor:pointer;font-size:16px}.q button:hover{background:var(--sage2)}
+.bd{font:600 12px Inter;padding:3px 10px;border-radius:99px;background:var(--sage2);color:var(--g)}.bd.w{background:var(--or2);color:#9a5410}.bd.r{background:#f6d5cd;color:var(--red)}
+.x2{background:none;border:0;color:var(--mu);cursor:pointer;font-size:18px}.x2:hover{color:var(--red)}
+.empty{text-align:center;padding:40px 20px;color:var(--mu);background:var(--card);border:1.5px dashed var(--sage);border-radius:18px;grid-column:1/-1}.empty .em{font-size:44px}
+.det{display:grid;grid-template-columns:1fr 1fr;gap:28px}@media(max-width:800px){.det{grid-template-columns:1fr}}
+.dh{height:240px;border-radius:22px;display:grid;place-items:center;font-size:120px;margin-bottom:16px}
+.ck-i{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--ln);text-transform:capitalize}.ck-i i{width:22px;height:22px;border-radius:7px;border:2px solid var(--or);display:grid;place-items:center;font-style:normal;font-size:13px;color:#fff;flex:none}.ck-i.h i{background:var(--g2);border-color:var(--g2)}.ck-i.m span{color:#9a5410}.ck-i em{margin-left:auto;font-size:12px;color:var(--mu)}
+ol.st{padding-left:22px}ol.st li{padding:8px 0}
+#cook{position:fixed;inset:0;background:var(--bg);z-index:50;display:none;overflow:auto}#cook.open{display:grid;place-items:center}
+.ck{width:min(720px,92vw);padding:30px 0}.ck h2{display:block;font-size:clamp(24px,4vw,36px);line-height:1.25;margin:24px 0}.x{float:right;background:var(--sage2);border:0;width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:16px}
+.tm{display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:var(--card);border:1px solid var(--ln);border-radius:16px;padding:14px 18px;margin-bottom:22px}.tm b{font:700 34px Fraunces,serif;color:var(--or);min-width:96px}.tm input{width:70px}.nv{display:flex;justify-content:space-between}
+#toast{position:fixed;left:50%;bottom:84px;transform:translate(-50%,30px);background:var(--g);color:#fff;padding:12px 22px;border-radius:99px;opacity:0;transition:.3s;z-index:99;pointer-events:none;font-weight:500}#toast.on{opacity:1;transform:translate(-50%,0)}#toast.err{background:var(--red)}
+footer{text-align:center;color:var(--mu);font-size:13px;padding:10px}footer button{background:none;border:0;color:var(--or);cursor:pointer;font:inherit;text-decoration:underline}
+@media(max-width:700px){header{padding:10px 16px}nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--ln);justify-content:space-around;padding:6px;margin:0}nav a{padding:8px 10px;font-size:13px}.logo{margin-right:auto}main{padding:20px 16px}.hero{padding:24px}body{padding-bottom:70px}#toast{bottom:90px}}
+@keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}@keyframes sh{to{background-position:-200% 0}}
+.card{box-shadow:0 1px 2px rgba(31,74,54,.05),0 10px 26px -18px rgba(31,74,54,.3)}.grid>.card,.it{animation:up .45s both}.grid>.card:nth-child(2n){animation-delay:.06s}.grid>.card:nth-child(3n){animation-delay:.12s}
+.ph,.dh{position:relative;overflow:hidden}.ph{height:170px}.ph img,.dh img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s,transform .6s}.ph img.l,.dh img.l{opacity:1}.rc:hover .ph img{transform:scale(1.06)}
+.sk .ph{background:linear-gradient(90deg,#efe9db 25%,#f7f2e6 50%,#efe9db 75%);background-size:200% 100%;animation:sh 1.2s infinite}.sk .b i{display:block;height:12px;border-radius:6px;background:#efe9db;margin:10px 0;width:80%}.sk .b i+i{width:50%}
+.tags{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}.tg{font:600 11px Inter;background:var(--sage2);color:var(--g);padding:2px 9px;border-radius:99px}.tg.o{background:var(--or2);color:#9a5410}
+.pct,.card .fv{z-index:3}.b h3{line-height:1.25}.gh{font:600 13px Inter;margin:20px 0 10px;color:var(--mu);text-transform:uppercase;letter-spacing:.07em}.gh span{background:var(--sage2);border-radius:99px;padding:1px 8px;margin-left:4px}
+.q input{width:72px;text-align:center;padding:6px}.q select{padding:6px}.warn{background:var(--or2);color:#8a4b0b;padding:12px 16px;border-radius:14px;margin-bottom:16px;font-weight:500}.warn a{color:inherit}
+.dots{display:flex;gap:8px;margin:16px 0 4px;flex-wrap:wrap}.dt{width:34px;height:34px;border-radius:50%;border:2px solid var(--sage);background:#fff;font-weight:600;cursor:pointer;color:var(--g);transition:.2s}.dt.d{background:var(--g2);color:#fff;border-color:var(--g2)}.dt.a{background:var(--or);border-color:var(--or);color:#fff;transform:scale(1.15)}
+.ck-i small{color:var(--mu);margin-left:6px}.sub{background:var(--sage2);border-radius:14px;padding:12px 16px;margin-top:16px;font-size:14px}.sub p{margin:4px 0}label{cursor:pointer}
+@media(max-width:700px){.grid{grid-template-columns:repeat(2,1fr);gap:12px}.ph{height:112px}.b{padding:10px 12px 12px}.b h3{font-size:15px}.sm{font-size:12px}.fl select,.fl input[type=text]{flex:1 1 45%}.dh{height:190px}nav{padding-bottom:max(6px,env(safe-area-inset-bottom))}.it{gap:10px}.it .n{flex-basis:55%}.stat{min-width:44%}}
+</style></head><body>
+<header><a class="logo" href="#home">WHISK<small>Your kitchen. Your possibilities.</small></a>
+<nav><a data-p="home" href="#home">Home</a><a data-p="kitchen" href="#kitchen">My Kitchen</a><a data-p="discover" href="#discover">Discover</a><a data-p="saved" href="#saved">Saved</a></nav></header>
+<main id="app"></main>
+<footer>WHISK demo · data lives in your browser · <button onclick="resetDemo()">Reset demo data</button></footer>
+<div id="cook"></div><div id="toast"></div>
+<script>
+const $=s=>document.querySelector(s);
+const CATS={vegetables:'onion,garlic,tomato,potato,carrot,spinach,bell pepper,broccoli,mushroom,zucchini,cucumber,lettuce,ginger,chili,cabbage,sweet potato,eggplant,peas',fruits:'lemon,lime,apple,banana,avocado,orange,berries',dairy:'milk,butter,cheese,egg,yogurt,cream,paneer,parmesan',grains:'rice,pasta,bread,flour,oats,noodles,tortilla,quinoa',meat:'chicken,beef,bacon,salmon,shrimp,tuna,sausage',pantry:'sugar,soy sauce,honey,chickpeas,lentils,coconut milk,tomato sauce,curry powder,cumin,stock,vinegar,beans,peanut butter',others:'basil,cilantro,parsley,tofu'};
+for(const k in CATS)CATS[k]=CATS[k].split(',');
+const EM={vegetables:'🥕',fruits:'🍋',dairy:'🧀',grains:'🌾',meat:'🍗',pantry:'🫙',others:'🌿'};
+const ALL=Object.values(CATS).flat();
+const catOf=n=>Object.keys(CATS).find(k=>CATS[k].includes(n))||'others';
+const RAW=`Garlic Butter Pasta|🍝|Italian|20|Easy|pasta,garlic,butter,parsley,?parmesan|Boil pasta in salted water until al dente;Melt butter and sizzle sliced garlic for one minute;Toss pasta with garlic butter, parsley and a splash of pasta water
+Tomato Basil Pasta|🍝|Italian|25|Easy|pasta,tomato,garlic,basil,?parmesan|Cook pasta until al dente;Simmer chopped tomatoes and garlic in olive oil for 10 minutes;Toss with pasta and torn basil
+Veggie Fried Rice|🍚|Chinese|20|Easy|rice,egg,carrot,peas,soy sauce,onion|Stir-fry diced onion and carrot for 3 minutes;Push aside, scramble the eggs, then add peas and cold rice;Season with soy sauce and fry until hot
+Chicken Stir-Fry|🥘|Chinese|25|Medium|chicken,bell pepper,broccoli,soy sauce,garlic,ginger|Slice chicken and sear on high heat until golden;Add garlic, ginger, pepper and broccoli, toss 4 minutes;Finish with soy sauce and serve hot
+Shakshuka|🍳|Middle Eastern|30|Easy|egg,tomato,onion,bell pepper,garlic,cumin,?parsley|Soften onion, pepper and garlic with cumin;Add chopped tomatoes and simmer until thick;Crack in eggs, cover and cook 5 minutes
+Mushroom Omelette|🍳|French|10|Easy|egg,mushroom,butter,?cheese|Sauté sliced mushrooms in butter until browned;Pour whisked eggs over the pan and stir gently;Add cheese, fold and serve
+Spinach Paneer Curry|🍛|Indian|35|Medium|paneer,spinach,onion,tomato,garlic,ginger,curry powder,?cream|Cook onion, garlic and ginger with curry powder;Add tomato, then spinach until wilted, and blend if you like it smooth;Fold in cubed paneer and cream, simmer 5 minutes
+Chana Masala|🍛|Indian|35|Easy|chickpeas,onion,tomato,garlic,ginger,curry powder|Fry onion, garlic and ginger until golden;Stir in curry powder and chopped tomato until jammy;Add chickpeas with a cup of water and simmer 15 minutes
+Dal Tadka|🍲|Indian|35|Easy|lentils,onion,tomato,garlic,cumin,butter|Boil lentils with tomato until soft;Fry cumin, onion and garlic in butter;Pour the tempering over the dal and stir
+Chicken Curry|🍛|Indian|45|Medium|chicken,onion,tomato,garlic,ginger,curry powder,yogurt|Brown onion, garlic and ginger;Add curry powder, tomato and chicken, cook 10 minutes;Stir in yogurt and simmer 20 minutes until tender
+Guacamole Toast|🥑|Mexican|10|Easy|avocado,bread,lime,tomato,?chili|Toast the bread;Mash avocado with lime juice and salt;Top with diced tomato and chili
+Chicken Quesadilla|🌮|Mexican|20|Easy|tortilla,chicken,cheese,bell pepper,onion|Cook sliced chicken, pepper and onion until tender;Layer on a tortilla with cheese and fold;Griddle both sides until crisp and melted
+Black Bean Tacos|🌮|Mexican|20|Easy|tortilla,beans,avocado,tomato,lime,cilantro|Warm the beans with a pinch of salt;Warm tortillas in a dry pan;Fill with beans, avocado, tomato, cilantro and lime
+Lemon Garlic Salmon|🐟|Mediterranean|25|Medium|salmon,lemon,garlic,butter,?parsley|Season salmon and sear skin-side down 4 minutes;Flip, add butter and garlic;Squeeze lemon over and baste for 2 minutes
+Greek Salad|🥗|Greek|15|Easy|cucumber,tomato,onion,cheese,vinegar|Chop cucumber, tomato and onion into chunks;Whisk vinegar with olive oil and salt;Toss together and crumble cheese on top
+Caprese Sandwich|🥪|Italian|10|Easy|bread,tomato,cheese,basil|Slice tomato and cheese;Layer on bread with basil and olive oil;Press or toast lightly
+Tomato Soup|🍅|American|35|Easy|tomato,onion,garlic,stock,?cream,?bread|Soften onion and garlic;Add tomatoes and stock, simmer 20 minutes;Blend smooth and finish with cream
+Creamy Potato Soup|🥣|American|40|Easy|potato,onion,stock,milk,butter,?bacon|Sauté onion in butter;Add cubed potato and stock, simmer until soft;Mash partly, stir in milk and top with bacon
+Fluffy Pancakes|🥞|American|20|Easy|flour,milk,egg,butter,sugar,?berries|Whisk flour, sugar, milk and egg into a batter;Melt butter in a pan and ladle in batter;Flip when bubbles form and serve with berries
+Banana Oat Porridge|🥣|Breakfast|10|Easy|oats,milk,banana,honey|Simmer oats in milk for 5 minutes;Stir in mashed banana;Drizzle with honey
+French Toast|🍞|French|15|Easy|bread,egg,milk,butter,?honey|Whisk egg with milk;Soak bread slices briefly;Fry in butter until golden on both sides
+Avocado Egg Rice Bowl|🥑|Modern|15|Easy|avocado,egg,rice,soy sauce,?chili|Fry or soft-boil the eggs;Pile warm rice in a bowl with sliced avocado;Top with egg, soy sauce and chili
+Classic Beef Burgers|🍔|American|30|Medium|beef,bread,onion,lettuce,tomato,cheese|Shape beef into patties and season well;Sear 4 minutes per side, adding cheese at the end;Build in bread with onion, lettuce and tomato
+Beef Noodle Stir-Fry|🍜|Asian|25|Medium|beef,noodles,bell pepper,soy sauce,garlic,carrot|Boil noodles and drain;Sear sliced beef, then add garlic, pepper and carrot;Toss with noodles and soy sauce
+Peanut Noodles|🍜|Thai|15|Easy|noodles,peanut butter,soy sauce,lime,garlic,?cucumber|Cook noodles and rinse;Whisk peanut butter, soy sauce, lime and garlic;Toss and top with cucumber
+Thai Coconut Curry|🍲|Thai|35|Medium|coconut milk,chicken,bell pepper,curry powder,ginger,rice|Fry ginger and curry powder for one minute;Add chicken, pepper and coconut milk, simmer 20 minutes;Serve over steamed rice
+Garlic Shrimp Skillet|🍤|Spanish|15|Easy|shrimp,garlic,butter,lemon,?parsley,?chili|Melt butter and soften garlic;Add shrimp and cook 2 minutes per side;Finish with lemon, parsley and chili
+Shrimp Fried Rice|🍤|Chinese|20|Easy|shrimp,rice,egg,peas,soy sauce,garlic|Sear shrimp with garlic and set aside;Scramble egg, add rice and peas;Return shrimp, season with soy sauce
+Roasted Veggie Tray|🥕|Mediterranean|40|Easy|potato,carrot,zucchini,bell pepper,garlic,onion|Heat oven to 200°C and chop all vegetables;Toss with olive oil, garlic and salt on a tray;Roast 30 minutes, turning once
+Stuffed Bell Peppers|🫑|Mediterranean|50|Medium|bell pepper,rice,tomato sauce,onion,cheese,?beef|Halve peppers and cook the rice;Mix rice with sautéed onion, tomato sauce and beef;Stuff, top with cheese and bake 30 minutes at 190°C
+Zucchini Fritters|🥒|Greek|25|Easy|zucchini,egg,flour,cheese,?yogurt|Grate zucchini and squeeze out the water;Mix with egg, flour and cheese;Pan-fry spoonfuls until golden, serve with yogurt
+Eggplant Parmigiana|🍆|Italian|55|Hard|eggplant,tomato sauce,cheese,parmesan,flour,egg|Slice eggplant, dredge in flour and egg, and fry;Layer with tomato sauce and cheese;Top with parmesan and bake 25 minutes at 190°C
+Mac and Cheese|🧀|American|30|Easy|pasta,cheese,milk,butter,flour|Boil the pasta;Make a roux of butter and flour, whisk in milk;Melt in cheese and fold through the pasta
+Spaghetti Carbonara|🍝|Italian|25|Medium|pasta,egg,bacon,parmesan|Crisp the bacon and boil the pasta;Whisk eggs with parmesan;Toss hot pasta off the heat with egg mix and bacon
+Sweet Potato Power Bowl|🍠|Modern|40|Easy|sweet potato,quinoa,chickpeas,avocado,lemon,spinach|Roast cubed sweet potato 25 minutes at 200°C;Cook quinoa and warm the chickpeas;Assemble with spinach, avocado and lemon juice
+Quinoa Veggie Salad|🥗|Modern|25|Easy|quinoa,cucumber,tomato,lemon,?cheese,?parsley|Cook quinoa and cool;Dice cucumber and tomato;Toss with lemon juice, olive oil and herbs
+Red Lentil Soup|🥣|Middle Eastern|40|Easy|lentils,carrot,onion,garlic,cumin,lemon,stock|Sauté onion, carrot, garlic and cumin;Add lentils and stock, simmer 25 minutes;Blend and brighten with lemon
+Lemon Tuna Pasta|🍝|Italian|20|Easy|pasta,tuna,lemon,garlic,?parsley|Boil the pasta;Warm garlic in olive oil, add tuna and lemon zest;Toss with pasta and lemon juice
+Spinach Frittata|🍳|Italian|25|Easy|egg,spinach,onion,cheese,?mushroom|Soften onion and wilt spinach in an oven-safe pan;Pour in whisked eggs and cheese;Cook 3 minutes, then bake 10 minutes at 190°C
+Honey Garlic Chicken|🍗|American|35|Medium|chicken,honey,soy sauce,garlic,?ginger,?broccoli|Whisk honey, soy sauce and garlic;Sear chicken until golden;Pour in the sauce and simmer until sticky
+Tofu Veggie Stir-Fry|🥦|Chinese|25|Easy|tofu,broccoli,soy sauce,ginger,garlic,carrot|Press and cube the tofu, fry until crisp;Add ginger, garlic, carrot and broccoli;Toss with soy sauce
+Berry Yogurt Parfait|🍓|Breakfast|5|Easy|yogurt,berries,oats,honey|Layer yogurt in a glass;Add berries and oats;Drizzle with honey
+Crunchy Cabbage Slaw|🥬|American|15|Easy|cabbage,carrot,yogurt,lemon,?honey|Shred cabbage and carrot finely;Mix yogurt, lemon juice and honey;Toss and rest 10 minutes
+Aloo Paratha|🫓|Indian|35|Medium|flour:250,potato:3,onion:1,chili:1,butter:30,?yogurt:100|Boil and mash the potatoes, then mix with chopped onion, chili and salt;Knead the flour with water into a soft dough, stuff each ball with filling and roll flat;Cook on a hot pan with butter until golden spots appear on both sides|Breakfast
+Masala Omelette|🍳|Indian|10|Easy|egg:3,onion:1,tomato:1,chili:1,?cilantro:10|Chop the onion, tomato and chili finely;Whisk the eggs with salt and the chopped vegetables;Cook in a buttered pan until just set, then fold|Breakfast
+Vegetable Pulao|🍚|Indian|35|Easy|rice:200,carrot:1,peas:80,onion:1,cumin:5,butter:20|Fry cumin and sliced onion in butter until golden;Add carrot, peas and washed rice, stir for one minute;Pour in double the volume of water, cover and cook 15 minutes|Main
+Paneer Bhurji|🧀|Indian|20|Easy|paneer:200,onion:1,tomato:2,chili:1,curry powder:5|Fry onion and chili until soft;Add tomato and curry powder and cook until pulpy;Crumble in the paneer and cook 3 minutes|Main
+Jeera Aloo|🥔|Indian|25|Easy|potato:4,cumin:5,ginger:10,chili:1,?cilantro:10|Boil the potatoes and cut into cubes;Crackle cumin in hot oil, then add ginger and chili;Toss in the potatoes until crisp at the edges|Main
+Palak Khichdi|🍲|Indian|35|Easy|rice:150,lentils:100,spinach:150,cumin:5,garlic:3,butter:20|Rinse the rice and lentils together;Fry cumin and garlic in butter, add spinach until wilted;Add rice, lentils and water, simmer until soft and porridge-like|Main
+Bread Pakora|🥪|Indian|25|Medium|bread:4,potato:2,flour:100,chili:1,curry powder:5|Mash boiled potato with chili and spice;Sandwich between bread slices and cut into triangles;Dip in a flour batter and fry until crisp|Snack
+Chicken Tikka Rice Bowl|🍗|Indian|40|Medium|chicken:400,yogurt:150,curry powder:10,garlic:3,ginger:15,lemon:1,rice:200|Marinate chicken in yogurt, spices, garlic, ginger and lemon for 20 minutes;Sear in a hot pan until charred and cooked through;Serve over steamed rice|Main
+Banana Lassi|🥛|Indian|5|Easy|banana:2,yogurt:250,milk:100,honey:15|Peel and chop the bananas;Blend with yogurt, milk and honey until smooth;Serve well chilled|Dessert
+Honey Banana Toast|🍌|Breakfast|5|Easy|bread:2,banana:1,honey:15,?butter:10|Toast the bread;Spread with butter and layer banana slices on top;Drizzle with honey|Breakfast
+Apple Oat Crumble|🍎|British|45|Easy|apple:4,oats:80,butter:60,flour:50,sugar:50|Slice the apples and toss with half the sugar in a baking dish;Rub butter, flour, oats and the remaining sugar into crumbs;Scatter over the apples and bake 30 minutes at 180°C|Dessert
+Creamy Rice Pudding|🍚|Indian|35|Easy|rice:100,milk:750,sugar:50,?cream:50|Simmer the rice in milk over low heat, stirring often;Cook 25 minutes until thick and creamy;Stir in sugar and a splash of cream|Dessert
+Banana Oat Cookies|🍪|American|25|Easy|banana:2,oats:150,honey:20,?butter:20|Mash the bananas and mix with oats and honey;Scoop onto a lined tray;Bake 15 minutes at 180°C until golden|Dessert
+Lemon Sugar Crepes|🥞|French|25|Easy|flour:120,milk:250,egg:2,butter:20,lemon:1,sugar:30|Whisk flour, milk, egg and melted butter into a thin batter;Cook thin crepes in a hot pan, one minute per side;Sprinkle with sugar and lemon juice, then fold|Dessert
+Garlic Bread|🥖|Italian|15|Easy|bread:4,butter:50,garlic:3,?parsley:10,?cheese:40|Mash butter with minced garlic and parsley;Spread generously over the bread;Bake 10 minutes at 200°C until crisp|Snack
+Tomato Bruschetta|🍅|Italian|15|Easy|bread:4,tomato:3,garlic:1,basil:10|Toast the bread and rub with a garlic clove;Dice tomatoes and mix with torn basil and salt;Spoon on top just before serving|Snack
+Lemony Chickpea Salad|🥗|Mediterranean|15|Easy|chickpeas:400,cucumber:1,tomato:2,onion:1,lemon:1,?parsley:10|Drain and rinse the chickpeas;Dice the cucumber, tomato and onion;Toss with lemon juice, olive oil and salt|Snack
+Veggie Wrap|🌯|Modern|15|Easy|tortilla:2,lettuce:2,cucumber:1,tomato:1,yogurt:60,?avocado:1|Warm the tortillas in a dry pan;Layer lettuce, cucumber, tomato and avocado;Drizzle with yogurt and roll tightly|Snack
+Egg Fried Noodles|🍜|Chinese|15|Easy|noodles:200,egg:2,cabbage:100,carrot:1,soy sauce:30,garlic:2|Cook the noodles and drain;Scramble the egg, then add garlic, cabbage and carrot;Toss the noodles through with soy sauce|Main
+Creamy Mushroom Pasta|🍄|Italian|25|Easy|pasta:200,mushroom:200,cream:150,garlic:2,parmesan:30|Boil the pasta until al dente;Brown the mushrooms with garlic;Add cream and parmesan, simmer, then toss the pasta through|Main
+Chicken Noodle Soup|🍜|American|40|Easy|chicken:250,noodles:100,carrot:2,onion:1,stock:1000,garlic:2|Simmer chicken in stock with onion, carrot and garlic for 20 minutes;Lift out and shred the chicken;Add noodles, cook 5 minutes and return the chicken|Main
+Beef Chilli|🌶️|Mexican|50|Medium|beef:400,beans:400,tomato sauce:400,onion:1,garlic:3,chili:1,cumin:5|Brown the beef with onion and garlic;Add cumin, chili, tomato sauce and beans;Simmer 30 minutes until thick|Main
+Egg Curry|🥚|Indian|30|Easy|egg:4,onion:2,tomato:2,garlic:3,ginger:10,curry powder:10|Hard-boil and peel the eggs;Cook onion, garlic, ginger, curry powder and tomato into a thick masala;Add the eggs and simmer 5 minutes|Main
+Veg Coconut Curry|🥥|Indian|35|Easy|coconut milk:400,potato:2,carrot:1,peas:80,curry powder:10,onion:1,ginger:10|Sauté onion and ginger with curry powder;Add potato, carrot and coconut milk, simmer 15 minutes;Add the peas for the last 3 minutes|Main
+Tuna Salad Sandwich|🥪|American|10|Easy|tuna:150,bread:4,yogurt:40,lettuce:2,?lemon:1|Mix the tuna with yogurt and a squeeze of lemon;Pile onto bread with lettuce;Press together and slice|Snack
+Salmon Rice Bowl|🍣|Japanese|25|Medium|salmon:250,rice:200,soy sauce:30,cucumber:1,avocado:1,ginger:10|Cook the rice and pan-sear the salmon with ginger;Slice the cucumber and avocado;Flake salmon over rice and drizzle with soy sauce|Main
+Crispy Potato Wedges|🍟|American|35|Easy|potato:4,garlic:2,?parmesan:20,?cheese|Cut potatoes into wedges and toss with oil, garlic and salt;Roast 30 minutes at 220°C, turning once;Sprinkle with parmesan to finish|Snack`;
+const ML='milk,cream,stock,coconut milk,tomato sauce,soy sauce,vinegar'.split(','),PC='onion,garlic,tomato,potato,carrot,bell pepper,zucchini,cucumber,lettuce,chili,eggplant,sweet potato,lemon,lime,apple,banana,avocado,orange,egg,bread,tortilla'.split(',');
+const unitOf=n=>ML.includes(n)?'ml':PC.includes(n)?'pcs':'g';
+const DQ={garlic:3,egg:2,'soy sauce':30,vinegar:20,honey:20,'peanut butter':40,butter:30,flour:100,sugar:40,'curry powder':10,cumin:5,parmesan:30,tomato:3,onion:1,lemon:1,lime:1,avocado:1,banana:1,bread:2,tortilla:3,basil:10,parsley:10,cilantro:10,ginger:15,chili:1,'bell pepper':1,carrot:2,potato:3};
+const dq=n=>DQ[n]||(ML.includes(n)?250:PC.includes(n)?2:200);
+const BF=/porridge|pancake|french toast|omelette|parfait|shakshuka|frittata/i,SN=/guacamole|quesadilla|caprese|fritters|slaw/i;
+const R=RAW.split('\n').map((l,id)=>{const[name,em,cuisine,t,diff,g,s,c]=l.split('|');const ing=g.split(',').map(x=>{const o=x[0]=='?',[n,q]=x.replace('?','').split(':');return{n,o,q:+q||dq(n),u:unitOf(n)}});return{id,name,em,cuisine,time:+t,diff,ing,steps:s.split(';'),course:c||(BF.test(name)?'Breakfast':SN.test(name)?'Snack':'Main'),slug:name.toLowerCase().replace(/[^a-z0-9]+/g,'-')}});
+R.forEach(r=>{const q=r.ing.filter(x=>!x.o).map(x=>x.n);r.veg=!q.some(n=>catOf(n)=='meat');r.vegan=r.veg&&!q.some(n=>catOf(n)=='dairy'||n=='honey')});
+const SEED=[['tomato',4,'pcs',2],['egg',6,'pcs',9],['milk',1,'L',3],['spinach',200,'g',1],['onion',3,'pcs',20],['garlic',10,'pcs',25],['rice',1,'kg',200],['pasta',500,'g',300],['butter',200,'g',30],['cheese',150,'g',6],['chicken',500,'g',2],['bell pepper',2,'pcs',4],['potato',4,'pcs',14],['carrot',3,'pcs',10],['lemon',2,'pcs',8],['bread',8,'pcs',3],['yogurt',400,'g',5],['mushroom',200,'g',2],['soy sauce',250,'ml',180],['flour',1,'kg',120],['avocado',2,'pcs',3],['chickpeas',400,'g',400],['parmesan',100,'g',45],['lentils',500,'g',300],['curry powder',50,'g',200],['cumin',30,'g',200],['ginger',100,'g',9],['paneer',200,'g',6],['banana',3,'pcs',2],['oats',400,'g',150],['honey',250,'g',300]];
+const iso=n=>{const d=new Date();d.setDate(d.getDate()+n);return d.toISOString().slice(0,10)};
+const seed=()=>({inv:SEED.map(([name,qty,unit,d])=>({name,qty,unit,exp:iso(d)})),fav:[1,4,13]});
+const norm=s=>{s=s.trim().toLowerCase().replace(/\s+/g,' ');if(ALL.includes(s))return s;for(const t of[s.replace(/es$/,''),s.replace(/s$/,'')])if(ALL.includes(t))return t;return s};
+let S=null;for(const k of['whisk.v2','whisk.v1']){try{S=JSON.parse(localStorage.getItem(k))}catch(e){}if(S&&S.inv)break}
+if(!S||!S.inv)S=seed();S.fav=S.fav||[];
+{const m={};S.inv.forEach(i=>{i.name=norm(i.name);i.qty=Math.max(0,+i.qty||0);if(m[i.name])m[i.name].qty+=i.qty;else m[i.name]=i});S.inv=Object.values(m)}
+const save=()=>{try{localStorage.setItem('whisk.v2',JSON.stringify(S))}catch(e){toast('Could not save data',1)}};
+const dl=i=>i&&i.exp?Math.round((new Date(i.exp+'T00:00:00')-new Date().setHours(0,0,0,0))/864e5):null;
+const toast=(m,err)=>{const t=$('#toast');t.textContent=m;t.className='on'+(err?' err':'');clearTimeout(toast.t);toast.t=setTimeout(()=>t.className='',2400)};
+const bg=id=>{const h=(id*47)%360;return`background:linear-gradient(135deg,hsl(${h} 50% 90%),hsl(${h} 38% 74%))`};
+const cap=s=>s[0].toUpperCase()+s.slice(1);
+
+/* ---- matching engine ---- */
+const PHOTO='img/'; // put <recipe-slug>.jpg files here; tiles fall back gracefully
+const BU={kg:1000,L:1000},bq=i=>i.qty*(BU[i.unit]||1),ukind=u=>u=='pcs'?'pcs':u=='g'||u=='kg'?'g':'ml';
+const SUB={butter:['olive oil','cream'],cream:['milk','yogurt'],milk:['cream','yogurt','coconut milk'],yogurt:['cream','milk'],lemon:['lime','vinegar'],lime:['lemon','vinegar'],vinegar:['lemon','lime'],parmesan:['cheese'],cheese:['parmesan','paneer'],paneer:['tofu','cheese'],tofu:['paneer'],chicken:['tofu','paneer','mushroom'],beef:['mushroom','sausage','chicken'],bacon:['sausage','mushroom'],shrimp:['chicken','tofu'],salmon:['tuna','chicken'],tuna:['salmon','chickpeas'],rice:['quinoa'],quinoa:['rice'],pasta:['noodles'],noodles:['pasta'],bread:['tortilla'],tortilla:['bread'],basil:['parsley','cilantro'],parsley:['basil','cilantro'],cilantro:['parsley','basil'],'tomato sauce':['tomato'],tomato:['tomato sauce'],honey:['sugar'],sugar:['honey'],chickpeas:['beans','lentils'],beans:['chickpeas','lentils'],lentils:['chickpeas','beans'],'sweet potato':['potato','carrot'],potato:['sweet potato'],spinach:['lettuce','broccoli'],'coconut milk':['cream','milk'],onion:['garlic'],ginger:['garlic']};
+const inv=n=>S.inv.find(i=>i.name==n&&i.qty>0);
+function match(r){
+ const rows=r.ing.map(x=>{const it=inv(x.n);let st,have=null,alt=null,cr=0;
+  if(it){const cmp=ukind(it.unit)==x.u;have=cmp?bq(it):null;if(!cmp||have>=x.q){st='ok';cr=1}else{st='low';cr=Math.max(.3,have/x.q)}}
+  else{alt=(SUB[x.n]||[]).find(a=>a=='olive oil'||inv(a));if(alt){st='sub';cr=.6}else st='miss'}
+  const d=it?dl(it):null;return{...x,st,have,alt,cr,it,d,urg:!!it&&d!==null&&d>=0&&d<=3}});
+ const rq=rows.filter(x=>!x.o),pct=Math.round(rq.reduce((a,x)=>a+x.cr,0)/rq.length*100),urgent=rq.filter(x=>x.urg);
+ return{r,rows,pct,urgent,ms:rq.filter(x=>x.st!='ok'),ready:rq.every(x=>x.st=='ok'),score:pct+urgent.reduce((a,x)=>a+10-x.d*2,0)}}
+const ranked=()=>R.map(match).sort((a,b)=>b.score-a.score);
+const photo=(r,x='')=>`<div class="ph" style="${bg(r.id)}"><span>${r.em}</span><img alt="${r.name}" loading="lazy" src="${PHOTO}${r.slug}.jpg" onload="this.classList.add('l')" onerror="this.remove()">${x}</div>`;
+const card=m=>{const r=m.r,n=m.rows.filter(x=>!x.o).length;return`<article class="card rc" onclick="location.hash='r${r.id}'">${photo(r,`<b class="pct">${m.pct}% match</b>`)}<button class="fv ${S.fav.includes(r.id)?'on':''}" data-id="${r.id}" onclick="event.stopPropagation();tf(${r.id})" aria-label="Save">♥</button><div class="b"><h3>${r.name}</h3><p class="meta">${r.cuisine} · ${r.time} min · ${r.diff}</p><div class="bar"><i style="width:${m.pct}%"></i></div><p class="sm">${n-m.ms.length} of ${n} ready${m.ms.length&&m.ms.length<3?' · need '+m.ms.map(x=>x.st=='sub'?x.n+' (or '+x.alt+')':x.n).join(', '):''}</p><div class="tags"><span class="tg">${r.course}</span>${r.vegan?'<span class="tg">🌱 Vegan</span>':r.veg?'<span class="tg">🥦 Veg</span>':''}${m.urgent.length?`<span class="tg o">Uses ${m.urgent[0].n} soon</span>`:''}</div></div></article>`};
+const sk=n=>Array(n).fill('<div class="card sk"><div class="ph"></div><div class="b"><i></i><i></i></div></div>').join('');
+const empty=(e,t,b)=>`<div class="empty"><div class="em">${e}</div><p>${t}</p>${b||''}</div>`;
+
+function tf(id){const on=!S.fav.includes(id);S.fav=on?[...S.fav,id]:S.fav.filter(x=>x!=id);save();
+ document.querySelectorAll(`.fv[data-id="${id}"]`).forEach(b=>{b.classList.toggle('on',on);if(b.dataset.t)b.textContent=on?'♥ Saved':'♡ Save recipe'});
+ toast(on?'Saved to favourites':'Removed from favourites');if(location.hash=='#saved')route(1)}
+
+/* ---- pages ---- */
+function home(){
+ const h=new Date().getHours(),g=h<12?'Good morning':h<18?'Good afternoon':'Good evening';
+ const soon=S.inv.filter(i=>{const d=dl(i);return d!==null&&d<=3}).sort((a,b)=>dl(a)-dl(b));
+ const rk=ranked(),ready=rk.filter(m=>m.ready).length;
+ $('#app').innerHTML=`<section class="hero"><div><h1>${g}, chef.</h1><p>${soon.length?`${soon.length} ingredient${soon.length>1?'s need':' needs'} your attention. Cook them first and waste nothing.`:'Everything is fresh. What shall we cook?'}</p></div><button class="btn or" onclick="location.hash='kitchen';setTimeout(()=>$('#nm').focus(),50)">＋ Add ingredients</button></section>
+ <div class="stats"><div class="stat"><b>${S.inv.length}</b><span>ingredients in your kitchen</span></div><div class="stat w"><b>${soon.length}</b><span>expiring within 3 days</span></div><div class="stat"><b>${ready}</b><span>recipes ready to cook</span></div><div class="stat"><b>${S.fav.length}</b><span>saved recipes</span></div></div>
+ <h2>Use these soon <a href="#kitchen">Manage kitchen →</a></h2>
+ ${soon.length?`<div class="chips">${soon.map(i=>`<span class="chip o">${EM[catOf(i.name)]} ${i.name} · ${dl(i)<0?'expired':dl(i)==0?'today':dl(i)+'d'}</span>`).join('')}</div>`:empty('🌿','Nothing is close to expiring.')}
+ <h2 style="margin-top:26px">Recommended for you <a href="#discover">All recipes →</a></h2><div class="grid">${rk.slice(0,6).map(card).join('')}</div>`}
+
+function kitchen(){
+ const soon=S.inv.filter(i=>{const d=dl(i);return d!==null&&d<=3}).length;
+ $('#app').innerHTML=`<h2>My Kitchen</h2>${soon?`<div class="warn">⚠️ ${soon} item${soon>1?'s':''} expiring within 3 days. <a href="#" onclick="$('#ex').checked=true;renderInv();return false">Show them</a></div>`:''}<div class="panel"><b>Add an ingredient</b>
+ <div class="chips" id="tabs">${Object.keys(CATS).map(c=>`<button class="chip" onclick="pickCat('${c}',this)">${EM[c]} ${c}</button>`).join('')}</div><div class="chips" id="pk"></div>
+ <div class="frm"><input type="text" id="nm" list="dl" placeholder="Search or type an ingredient…" oninput="autoU()"><datalist id="dl">${ALL.map(a=>`<option value="${a}">`).join('')}</datalist>
+ <input type="number" id="aq" value="1" min="0.1" step="any" style="width:80px"><select id="au"><option>pcs</option><option>g</option><option>kg</option><option>ml</option><option>L</option></select>
+ <input type="date" id="ad" title="Expiry date"><button class="btn" onclick="addIng()">Add</button></div></div>
+ <div class="fl" style="margin-bottom:6px"><input type="text" id="q" placeholder="Search inventory…" oninput="renderInv()" style="flex:1;min-width:160px"><select id="cf" onchange="renderInv()"><option value="">All categories</option>${Object.keys(CATS).map(c=>`<option>${c}</option>`).join('')}</select><label><input type="checkbox" id="ex" onchange="renderInv()"> Expiring soon</label></div><div id="inv"></div>`;
+ renderInv()}
+function pickCat(c,b){document.querySelectorAll('#tabs .chip').forEach(x=>x.classList.toggle('on',x==b));$('#pk').innerHTML=CATS[c].map(n=>`<button class="chip" onclick="$('#nm').value='${n}';autoU();$('#ad').focus()">${n}</button>`).join('')}
+function autoU(){const n=norm($('#nm').value);if(ALL.includes(n)){$('#au').value=unitOf(n);$('#aq').value=dq(n)}}
+function addIng(){const name=norm($('#nm').value),q=+$('#aq').value,u=$('#au').value;
+ if(!name)return toast('Choose or type an ingredient first',1);if(!(q>0))return toast('Quantity must be above zero',1);
+ const exp=$('#ad').value||null,ex=S.inv.find(i=>i.name==name);
+ if(ex){if(ukind(ex.unit)==ukind(u))ex.qty=+(ex.qty+q*(BU[u]||1)/(BU[ex.unit]||1)).toFixed(2);else{ex.qty=q;ex.unit=u}if(exp)ex.exp=exp;toast(`${name} already in your kitchen, quantity updated`)}
+ else{S.inv.push({name,qty:q,unit:u,exp});toast(`Added ${name} to your kitchen`)}
+ save();$('#nm').value='';renderInv()}
+function row(i){const d=dl(i),c=d===null?'':d<0?'exp':d<=3?'soon':'';
+ const b=d===null?'<span class="bd">No date</span>':d<0?'<span class="bd r">Expired</span>':d<=3?`<span class="bd w">${d==0?'Today':d+'d left'}</span>`:`<span class="bd">${d}d left</span>`;
+ return`<div class="card it ${c}"><span class="e">${EM[catOf(i.name)]}</span><div class="n">${i.name}<small>${catOf(i.name)}</small></div><div class="q"><button onclick="qty('${i.name}',-1)" aria-label="Less">−</button><input type="number" min="0" step="any" value="${i.qty}" onchange="setQty('${i.name}',this.value)"><select onchange="setUnit('${i.name}',this.value)">${['pcs','g','kg','ml','L'].map(u=>`<option ${u==i.unit?'selected':''}>${u}</option>`).join('')}</select><button onclick="qty('${i.name}',1)" aria-label="More">+</button></div><input type="date" value="${i.exp||''}" onchange="setExp('${i.name}',this.value)">${b}<button class="x2" title="Remove" onclick="rm('${i.name}')">✕</button></div>`}
+function renderInv(){if(!$('#inv'))return;const q=$('#q').value.toLowerCase(),c=$('#cf').value,ex=$('#ex').checked;
+ const l=S.inv.filter(i=>i.name.includes(q)&&(!c||catOf(i.name)==c)&&(!ex||(dl(i)!==null&&dl(i)<=3))).sort((a,b)=>(dl(a)??9e3)-(dl(b)??9e3));
+ if(!l.length){$('#inv').innerHTML=empty('🧺',S.inv.length?'No ingredients match your filters.':'Your kitchen is empty. Add your first ingredient above!');return}
+ const g={};l.forEach(i=>(g[catOf(i.name)]=g[catOf(i.name)]||[]).push(i));
+ $('#inv').innerHTML=Object.keys(CATS).filter(c=>g[c]).map(c=>`<h3 class="gh">${EM[c]} ${c} <span>${g[c].length}</span></h3>${g[c].map(row).join('')}`).join('')}
+function qty(n,d){const i=S.inv.find(x=>x.name==n),s=['pcs','kg','L'].includes(i.unit)?1:50;i.qty=Math.max(0,+(i.qty+d*s).toFixed(2));if(i.qty==0)toast(`${n} is out of stock, so recipes won’t count it`,1);save();renderInv()}
+function setQty(n,v){v=+v;if(!(v>=0)){toast('Quantity can’t be negative',1);return renderInv()}S.inv.find(x=>x.name==n).qty=v;save();renderInv();toast('Quantity updated')}
+function setUnit(n,u){S.inv.find(x=>x.name==n).unit=u;save();renderInv();toast('Unit updated')}
+function setExp(n,v){S.inv.find(x=>x.name==n).exp=v||null;save();renderInv();toast('Expiry updated')}
+function rm(n){S.inv=S.inv.filter(x=>x.name!=n);save();renderInv();toast(`Removed ${n}`)}
+function discover(){
+ const op=(id,l,a)=>`<select id="${id}" onchange="renderRL()"><option value="">${l}</option>${a.map(x=>`<option value="${x[0]}">${x[1]}</option>`).join('')}</select>`;
+ $('#app').innerHTML=`<h2>Discover recipes</h2><p class="sm" style="margin:-8px 0 16px">${R.length} recipes ranked by quantity match, with a boost for ingredients about to expire.</p><div class="fl" style="margin-bottom:20px"><input type="text" id="rq" placeholder="Search recipes or ingredients…" oninput="renderRL()" style="flex:1 1 100%;min-width:180px">${op('rc','All cuisines',[...new Set(R.map(r=>r.cuisine))].sort().map(c=>[c,c]))}${op('rg','Any course',['Breakfast','Main','Snack','Dessert'].map(c=>[c,c]))}${op('rd','Any difficulty',['Easy','Medium','Hard'].map(c=>[c,c]))}${op('rt','Any time',[[15,'≤ 15 min'],[30,'≤ 30 min'],[45,'≤ 45 min']])}${op('rv','Any diet',[['veg','Vegetarian'],['vegan','Vegan']])}<select id="rs" onchange="renderRL()"><option value="m">Best match</option><option value="t">Quickest</option></select><label><input type="checkbox" id="ro" onchange="renderRL()"> Missing ≤ 1</label><button class="btn ghost" onclick="discover()">Clear</button></div><div class="grid" id="rl">${sk(8)}</div>`;
+ setTimeout(renderRL,280)}
+function renderRL(){if(!$('#rl'))return;const q=$('#rq').value.toLowerCase(),c=$('#rc').value,d=$('#rd').value,t=+$('#rt').value,v=$('#rv').value,g=$('#rg').value,o=$('#ro').checked;
+ const l=ranked().filter(m=>{const r=m.r;return(!q||r.name.toLowerCase().includes(q)||r.ing.some(x=>x.n.includes(q)))&&(!c||r.cuisine==c)&&(!d||r.diff==d)&&(!t||r.time<=t)&&(!v||(v=='veg'?r.veg:r.vegan))&&(!g||r.course==g)&&(!o||m.ms.length<=1)});
+ if($('#rs').value=='t')l.sort((a,b)=>a.r.time-b.r.time);
+ $('#rl').innerHTML=l.length?`<p class="sm" style="grid-column:1/-1">${l.length} recipe${l.length>1?'s':''}</p>`+l.map(card).join(''):empty('🔍','No recipes match these filters. Try loosening them.','<br><br><button class="btn ghost" onclick="discover()">Clear filters</button>')}
+
+function saved(){const l=S.fav.map(id=>match(R[id]));
+ $('#app').innerHTML=`<h2>Saved recipes</h2><div class="grid">${l.length?l.map(card).join(''):empty('♡','You haven’t saved anything yet. Tap the heart on any recipe.','<br><br><button class="btn" onclick="location.hash=\'discover\'">Discover recipes</button>')}</div>`}
+
+function detail(id){const m=match(R[id]),r=m.r,f=S.fav.includes(id);
+ const li=x=>`<div class="ck-i ${x.st=='ok'?'h':'m'}"><i>${x.st=='ok'?'✓':''}</i><span>${x.n}${x.o?' (optional)':''}<small>${x.q} ${x.u}</small></span><em class="${x.urg?'use':''}">${x.urg?'use soon':x.st=='low'?'have '+(x.have!=null?+x.have.toFixed(0)+' '+x.u:'some'):x.st=='sub'?'swap: '+x.alt:x.st=='miss'&&!x.o?'missing':''}</em></div>`;
+ const hints=m.rows.filter(x=>x.st=='sub'||(x.st=='miss'&&SUB[x.n])).map(x=>x.st=='sub'?`<p>No ${x.n}? Use <b>${x.alt}</b>, you already have it.</p>`:`<p>No ${x.n}? Try ${SUB[x.n].join(' or ')} (not in your kitchen yet).</p>`).join('');
+ $('#app').innerHTML=`<p><a href="#discover" style="color:var(--or);text-decoration:none">← Back to recipes</a></p><div class="det"><div><div class="dh" style="${bg(id)}"><span>${r.em}</span><img alt="${r.name}" src="${PHOTO}${r.slug}.jpg" onload="this.classList.add('l')" onerror="this.remove()"></div><h1 style="font-size:34px">${r.name}</h1><p class="meta" style="margin:6px 0 14px">${r.cuisine} · ${r.course} · ${r.time} min · ${r.diff} · ${m.pct}% match${r.vegan?' · 🌱 Vegan':r.veg?' · 🥦 Vegetarian':''}</p><div class="fl"><button class="btn or" onclick="cook(${id})">▶ Start cooking</button><button class="btn ghost fv ${f?'on':''}" data-id="${id}" data-t="1" onclick="tf(${id})">${f?'♥ Saved':'♡ Save recipe'}</button><button class="btn ghost" onclick="usePanel(${id})">✓ I cooked this</button></div>
+ <h2 style="margin-top:26px">Method</h2><ol class="st">${r.steps.map(s=>`<li>${s}</li>`).join('')}</ol></div>
+ <div class="panel"><h2 style="margin-top:0">Ingredients</h2><p class="sm">${m.rows.filter(x=>!x.o&&x.st=='ok').length} of ${m.rows.filter(x=>!x.o).length} required ingredients ready in your kitchen.</p>${m.rows.map(li).join('')}
+ ${hints?`<div class="sub"><b>Substitution ideas</b>${hints}</div>`:''}
+ ${m.ms.length?`<button class="btn" style="margin-top:16px" onclick="addMissing(${id})">Mark missing as bought</button>`:'<p style="margin-top:14px;color:var(--g2);font-weight:600">✓ You have everything. Time to cook!</p>'}</div></div>`}
+function addMissing(id){match(R[id]).rows.forEach(x=>{if(x.o)return;if(x.st=='miss'||x.st=='sub')S.inv.push({name:x.n,qty:x.q,unit:x.u,exp:null});else if(x.st=='low'&&x.have!=null){x.it.qty=+(x.it.qty+(x.q-x.have)/(BU[x.it.unit]||1)).toFixed(2)}});save();toast('Kitchen updated with missing ingredients');detail(id)}
+function usePanel(id){clearInterval(T);C=null;const m=match(R[id]),l=m.rows.filter(x=>x.it);
+ $('#cook').classList.add('open');$('#cook').innerHTML=`<div class="ck"><button class="x" onclick="cx()" aria-label="Close">✕</button><h2>${l.length?'Nicely done! Update your kitchen?':'Nothing to deduct'}</h2><p class="sm">Tick what you used and WHISK will deduct it from your inventory.</p><div class="panel">${l.map(x=>`<label class="ck-i h"><input type="checkbox" class="us" data-n="${x.n}" ${x.o?'':'checked'}><span>${x.n} <small>−${x.q} ${x.u}</small></span></label>`).join('')}</div><div class="nv"><button class="btn ghost" onclick="cx()">Skip</button><button class="btn" onclick="applyUse(${id})">Deduct selected</button></div></div>`}
+function applyUse(id){const m=match(R[id]);let n=0;document.querySelectorAll('.us').forEach(c=>{if(!c.checked)return;const x=m.rows.find(r=>r.n==c.dataset.n),it=x&&x.it;if(!it)return;const u=ukind(it.unit)==x.u?x.q/(BU[it.unit]||1):it.unit=='pcs'?1:x.q*100/(BU[it.unit]||1);it.qty=Math.max(0,+(it.qty-u).toFixed(2));n++});S.inv=S.inv.filter(i=>i.qty>0);save();cx();toast(`Updated ${n} ingredient${n==1?'':'s'} in your kitchen`);route(1)}
+
+/* ---- cooking mode ---- */
+let C=null,T=null,tl=0;
+const fmt=s=>String(Math.floor(Math.max(s,0)/60)).padStart(2,'0')+':'+String(Math.max(s,0)%60).padStart(2,'0');
+function cook(id){C={r:R[id],i:0};tl=0;clearInterval(T);rc();$('#cook').classList.add('open')}
+function rc(){const{r,i}=C,n=r.steps.length;$('#cook').innerHTML=`<div class="ck"><button class="x" onclick="cx()" aria-label="Close">✕</button><p class="sm">${r.name} · Step ${i+1} of ${n} · ${Math.round(i/n*100)}% complete</p><div class="bar"><i style="width:${(i+1)/n*100}%"></i></div><div class="dots">${r.steps.map((_,k)=>`<button class="dt ${k<i?'d':k==i?'a':''}" onclick="C.i=${k};rc()">${k<i?'✓':k+1}</button>`).join('')}</div><h2>${r.steps[i]}</h2><div class="tm"><b id="td">${fmt(tl)}</b><input id="tmin" type="number" min="1" value="5"> min <button class="btn ghost" onclick="ts()">Start timer</button><button class="btn ghost" onclick="tr()">Reset</button></div><div class="nv"><button class="btn ghost" ${i?'':'disabled'} onclick="cs(-1)">← Previous</button><button class="btn" onclick="cs(1)">${i==n-1?'Finish ✓':'Next →'}</button></div></div>`}
+function cs(d){if(!C)return;const n=C.r.steps.length;if(C.i+d>=n){usePanel(C.r.id);return}C.i=Math.max(0,C.i+d);rc()}
+function cx(){clearInterval(T);C=null;$('#cook').classList.remove('open')}
+function ts(){clearInterval(T);tl=(+$('#tmin').value||1)*60;$('#td').textContent=fmt(tl);T=setInterval(()=>{tl--;const e=$('#td');if(e)e.textContent=fmt(tl);if(tl<=0){clearInterval(T);beep();toast('⏰ Timer finished!')}},1000)}
+function tr(){clearInterval(T);tl=0;$('#td').textContent=fmt(0)}
+function beep(){try{const a=new AudioContext(),o=a.createOscillator();o.connect(a.destination);o.frequency.value=880;o.start();o.stop(a.currentTime+.6)}catch(e){}}
+document.addEventListener('keydown',e=>{if($('#cook').classList.contains('open')){if(e.key=='ArrowRight')cs(1);if(e.key=='ArrowLeft')cs(-1);if(e.key=='Escape')cx()}});
+
+function resetDemo(){if(!confirm('Reset all ingredients and favourites to the demo data?'))return;S=seed();save();route(1);toast('Demo data restored')}
+function route(keep){const h=location.hash.slice(1)||'home';if(!keep)scrollTo(0,0);
+ document.querySelectorAll('nav a').forEach(a=>a.classList.toggle('on',a.dataset.p==h||(/^r\d+$/.test(h)&&a.dataset.p=='discover')));
+ if(h=='kitchen')kitchen();else if(h=='discover')discover();else if(h=='saved')saved();else if(/^r\d+$/.test(h)&&R[+h.slice(1)])detail(+h.slice(1));else home()}
+addEventListener('hashchange',()=>route());route();
+</script></body></html>
